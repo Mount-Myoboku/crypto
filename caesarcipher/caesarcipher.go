@@ -1,14 +1,13 @@
 package caesarcipher
 
-const alphabet =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 type caesarCipherBuilder struct {
 	plainTextRuneValueMap  map[rune]int
-	plainTextValueRuneMap map[int]rune
+	plainTextValueRuneMap  map[int]rune
 	cipherTextValueRuneMap map[int]rune
 	cipherTextRuneValueMap map[rune]int
 }
-
 
 func Init(shift int) caesarCipherBuilder {
 
@@ -20,13 +19,13 @@ func Init(shift int) caesarCipherBuilder {
 	var cipherTextValueRuneMap = make(map[int]rune)
 	var cipherTextRuneValueMap = make(map[rune]int)
 
-	for i,v := range alphabet {
+	for i, v := range alphabet {
 		plainTextRuneValueMap[v] = i + 1
 		plainTextValueRuneMap[i+1] = v
 		newIndex := i + shift
-		newRune := rune(alphabet[newIndex % 26])
+		newRune := rune(alphabet[newIndex%26])
 		cipherTextValueRuneMap[i+1] = newRune
-		cipherTextRuneValueMap[newRune] = i+1
+		cipherTextRuneValueMap[newRune] = i + 1
 	}
 
 	ccb.plainTextRuneValueMap = plainTextRuneValueMap
@@ -34,10 +33,8 @@ func Init(shift int) caesarCipherBuilder {
 	ccb.plainTextValueRuneMap = plainTextValueRuneMap
 	ccb.cipherTextRuneValueMap = cipherTextRuneValueMap
 
-
 	return ccb
 }
-
 
 func (ccb *caesarCipherBuilder) Encrypt(input string) string {
 
