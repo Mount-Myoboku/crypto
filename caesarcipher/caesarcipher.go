@@ -34,11 +34,7 @@ func Init(shift int) caesarCipherBuilder {
 	ccb.plainTextValueRuneMap = plainTextValueRuneMap
 	ccb.cipherTextRuneValueMap = cipherTextRuneValueMap
 
-	//fmt.Println(plainTextRuneValueMap)
-	//fmt.Println(cipherTextValueRuneMap)
-	//
-	//fmt.Println(plainTextValueRuneMap)
-	//fmt.Println(cipherTextRuneValueMap)
+
 	return ccb
 }
 
