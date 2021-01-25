@@ -23,6 +23,6 @@ jobs:
 
 workflows:
   version: 2
-  build_algos:
+  build:
     jobs:
       - lint-fmt-test
