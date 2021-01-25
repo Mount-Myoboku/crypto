@@ -3,13 +3,16 @@ package caesarcipher
 import "testing"
 
 func TestEncrypt(t *testing.T) {
-	output := Decrypt("HELLO")
 
-	if output != "EBIIL" {
-		t.Error("expected EBIIL, but got ", output)
+	cb := Init(5)
+
+	output := cb.Encrypt("HELLO")
+
+	if output != "MJQQT" {
+		t.Error("expected MJQQT, but got ", output)
 	}
 
-	output = Encrypt("EBIIL")
+	output = cb.Decrypt("MJQQT")
 
 	if output != "HELLO" {
 		t.Error("expected HELLO, but got ", output)
