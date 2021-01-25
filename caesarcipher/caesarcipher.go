@@ -9,6 +9,7 @@ type caesarCipherBuilder struct {
 	cipherTextRuneValueMap map[rune]int
 }
 
+// Init creates, prepares returns the base caesarCipherBuilder
 func Init(shift int) caesarCipherBuilder {
 
 	var ccb caesarCipherBuilder
@@ -36,6 +37,7 @@ func Init(shift int) caesarCipherBuilder {
 	return ccb
 }
 
+// Encrypt encrypts the input
 func (ccb *caesarCipherBuilder) Encrypt(input string) string {
 
 	var output string
@@ -48,6 +50,7 @@ func (ccb *caesarCipherBuilder) Encrypt(input string) string {
 	return output
 }
 
+// Decrypt decrypts the input
 func (ccb *caesarCipherBuilder) Decrypt(input string) string {
 
 	var output string
