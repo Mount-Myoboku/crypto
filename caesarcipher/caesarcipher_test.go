@@ -1,10 +1,14 @@
 package caesarcipher
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jaswdr/faker"
+)
+
+var cb = Init(5)
 
 func TestEncrypt(t *testing.T) {
-
-	cb := Init(5)
 
 	output := cb.Encrypt("HELLO")
 
@@ -12,10 +16,22 @@ func TestEncrypt(t *testing.T) {
 		t.Error("expected MJQQT, but got ", output)
 	}
 
-	output = cb.Decrypt("MJQQT")
+}
+
+func TestDecrypt(t *testing.T) {
+
+	output := cb.Decrypt("MJQQT")
 
 	if output != "HELLO" {
 		t.Error("expected HELLO, but got ", output)
 	}
+}
 
+func BenchmarkEncrypt(b *testing.B) {
+
+	f := faker.New()
+
+	for i := 0; i < b.N; i++ {
+		cb.Encrypt(f.Lorem().Paragraph(10))
+	}
 }
