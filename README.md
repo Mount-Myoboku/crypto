@@ -10,7 +10,6 @@ Simple crypto modules
 For details....
 https://en.wikipedia.org/wiki/Caesar_cipher
 
-
 ## Instructions
 
 Install the latest version with:
@@ -25,9 +24,13 @@ import "github.com/Mount-Myoboku/crypto/v2/caesarcipher"
 
 ## Documentation
 
-Current v2 godocs:
+v2 docs (Current):
 
-* [crypto/caesarcipher](https://pkg.go.dev/github.com/Mount-Myoboku/crypto/v2/caesarcipher):  A simple caesar cipher implementation
+* [crypto/v2/caesarcipher](https://pkg.go.dev/github.com/Mount-Myoboku/crypto/v2/caesarcipher)
+
+v1 docs:
+
+* [crypto/caesarcipher](https://pkg.go.dev/github.com/Mount-Myoboku/crypto/caesarcipher)
 
 ## License
 
