@@ -1,6 +1,7 @@
 package caesarcipher
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/jaswdr/faker"
@@ -49,4 +50,23 @@ func BenchmarkEncrypt(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Encrypt(f.Lorem().Paragraph(10))
 	}
+}
+
+func BenchmarkDecrypt(b *testing.B) {
+	f := faker.New()
+	for i := 0; i < b.N; i++ {
+		Decrypt(f.Lorem().Paragraph(10))
+	}
+}
+
+func ExampleEncrypt() {
+	output := Encrypt("HELLO!")
+	fmt.Println(output)
+	// "EBIIL!"
+}
+
+func ExampleDecrypt() {
+	output := Encrypt("EBIIL!")
+	fmt.Println(output)
+	// "HELLO!"
 }
