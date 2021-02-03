@@ -7,6 +7,9 @@ import (
 	// "github.com/jaswdr/faker"
 	"github.com/jaswdr/faker"
 	"gopkg.in/check.v1"
+
+	"github.com/leanovate/gopter"
+	"github.com/leanovate/gopter/prop"
 )
 
 // type testCase struct {
@@ -101,6 +104,16 @@ func (s *TestSuite) TestEncrypt(c *check.C) {
 		output := Encrypt(test.plain)
 		c.Assert(output, check.Equals, test.cipher, check.Commentf("expected %s, but got %s", test.cipher, output))
 	}
+
+	properties := gopter.NewProperties(nil)
+
+	properties.Property("output->(Encrypt)->(Decrypt)->output", prop.ForAll(
+
+		func(input string) string {
+
+		}
+
+	))
 
 }
 
