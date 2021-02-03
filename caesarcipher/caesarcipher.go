@@ -1,64 +1,42 @@
 package caesarcipher
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+func encode(input string, shift int, flip bool) string {
 
-type caesarCipherBuilder struct {
-	plainTextRuneValueMap  map[rune]int
-	plainTextValueRuneMap  map[int]rune
-	cipherTextValueRuneMap map[int]rune
-	cipherTextRuneValueMap map[rune]int
-}
+	var output string
 
-// Init creates, prepares returns the base caesarCipherBuilder, fam
-func Init(shift int) caesarCipherBuilder {
+	for _, char := range input {
+		newChar := char
 
-	var ccb caesarCipherBuilder
+		switch flip {
+		case true:
+			if (int(char) >= 'a' && char <= 'z') || char >= 'A' && char <= 'Z' {
+				newChar = rune(int(char) + shift)
+				if int(newChar) > 'z' || int(newChar) > 'Z' && int(newChar) < 'a' {
+					newChar -= 26
+				}
+			}
 
-	var plainTextRuneValueMap = make(map[rune]int)
-	var plainTextValueRuneMap = make(map[int]rune)
+		case false: // default case - use to encrypt
 
-	var cipherTextValueRuneMap = make(map[int]rune)
-	var cipherTextRuneValueMap = make(map[rune]int)
+			if (int(char) >= 'a' && char <= 'z') || char >= 'A' && char <= 'Z' {
+				newChar = rune(int(char) - shift)
+				if int(newChar) < 'A' || int(newChar) > 'Z' && int(newChar) < 'a' {
+					newChar += 26
+				}
+			}
+		}
 
-	for i, v := range alphabet {
-		plainTextRuneValueMap[v] = i + 1
-		plainTextValueRuneMap[i+1] = v
-		newIndex := i + shift
-		newRune := rune(alphabet[newIndex%26])
-		cipherTextValueRuneMap[i+1] = newRune
-		cipherTextRuneValueMap[newRune] = i + 1
+		output += string(newChar)
 	}
-
-	ccb.plainTextRuneValueMap = plainTextRuneValueMap
-	ccb.cipherTextValueRuneMap = cipherTextValueRuneMap
-	ccb.plainTextValueRuneMap = plainTextValueRuneMap
-	ccb.cipherTextRuneValueMap = cipherTextRuneValueMap
-
-	return ccb
+	return output
 }
 
 // Encrypt encrypts the input
-func (ccb *caesarCipherBuilder) Encrypt(input string) string {
-
-	var output string
-
-	for _, char := range input {
-		newRune := ccb.cipherTextValueRuneMap[(ccb.plainTextRuneValueMap[char])]
-		output = output + string(newRune)
-	}
-
-	return output
+func Encrypt(input string) string {
+	return encode(input, 3, false)
 }
 
 // Decrypt decrypts the input
-func (ccb *caesarCipherBuilder) Decrypt(input string) string {
-
-	var output string
-
-	for _, char := range input {
-		newRune := ccb.plainTextValueRuneMap[(ccb.cipherTextRuneValueMap[char])]
-		output = output + string(newRune)
-	}
-
-	return output
+func Decrypt(input string) string {
+	return encode(input, 3, true)
 }

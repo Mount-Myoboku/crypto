@@ -6,18 +6,16 @@ import (
 	"github.com/jaswdr/faker"
 )
 
-var cb = Init(5)
-
 func TestEncrypt(t *testing.T) {
-	output := cb.Encrypt("HELLO")
-	if output != "MJQQT" {
-		t.Error("expected MJQQT, but got ", output)
+	output := Encrypt("HELLO")
+	if output != "EBIIL" {
+		t.Error("expected EBIIL, but got ", output)
 	}
 
 }
 
 func TestDecrypt(t *testing.T) {
-	output := cb.Decrypt("MJQQT")
+	output := Decrypt("EBIIL")
 	if output != "HELLO" {
 		t.Error("expected HELLO, but got ", output)
 	}
@@ -26,6 +24,6 @@ func TestDecrypt(t *testing.T) {
 func BenchmarkEncrypt(b *testing.B) {
 	f := faker.New()
 	for i := 0; i < b.N; i++ {
-		cb.Encrypt(f.Lorem().Paragraph(10))
+		Encrypt(f.Lorem().Paragraph(10))
 	}
 }
