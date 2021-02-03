@@ -1,4 +1,4 @@
-module github.com/Mount-Myoboku/crypto/v2
+module github.com/Mount-Myoboku/crypto.v2
 
 go 1.15
 
