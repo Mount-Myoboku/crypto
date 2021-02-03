@@ -6,18 +6,41 @@ import (
 	"github.com/jaswdr/faker"
 )
 
+type testCase struct {
+	input  string
+	output string
+}
+
 func TestEncrypt(t *testing.T) {
-	output := Encrypt("HELLO")
-	if output != "EBIIL" {
-		t.Error("expected EBIIL, but got ", output)
+
+	cases := []testCase{
+		{input: "HELLO", output: "EBIIL"},
+		{input: "!*@{,", output: "!*@{,"},
+		{input: "ZAZZY", output: "WXWWV"},
+	}
+
+	for _, test := range cases {
+		output := Encrypt(test.input)
+		if output != test.output {
+			t.Errorf("expected %s, but got %s", test.output, output)
+		}
 	}
 
 }
 
 func TestDecrypt(t *testing.T) {
-	output := Decrypt("EBIIL")
-	if output != "HELLO" {
-		t.Error("expected HELLO, but got ", output)
+
+	cases := []testCase{
+		{output: "HELLO", input: "EBIIL"},
+		{output: "!*@{,", input: "!*@{,"},
+		{output: "ZAZZY", input: "WXWWV"},
+	}
+
+	for _, test := range cases {
+		output := Decrypt(test.input)
+		if output != test.output {
+			t.Errorf("expected %s, but got %s", test.output, output)
+		}
 	}
 }
 
