@@ -34,4 +34,4 @@ v1 docs:
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](./LICENSE)
